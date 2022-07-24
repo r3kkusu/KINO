@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">KINO</string>
+    <string name="movie_artwork">Movie Artwork</string>
+    <string name="search">Search</string>
+    <string name="search_movie">Search Movies</string>
+    <string name="explore">EXPLORE</string>
+
+    <!-- STUB DATA   -->
+    <string name="stub_title">Dickie Roberts: Former Child Star</string>
+    <string name="stub_genre">Comedy, Sci-Fi</string>
+    <string name="stub_year">2003</string>
+    <string name="stub_rating">M</string>
+    <string name="stub_time">1h 30mins</string>
+    <string name="stub_price">11.99 AUD</string>
 </resources>
