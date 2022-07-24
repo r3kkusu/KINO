@@ -6,7 +6,7 @@ import com.kino.app.data.local.entity.MovieEntity
 
 @Database(
     entities = [MovieEntity::class],
-    version = 1
+    version = 2
 )
 abstract class KINODatabase: RoomDatabase() {
     abstract val dao: KINODao

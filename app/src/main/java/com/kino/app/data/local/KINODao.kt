@@ -21,7 +21,7 @@ interface KINODao {
     @Query("SELECT * FROM movie_table WHERE liked = :liked")
     fun getMovies(liked: Boolean): List<MovieEntity>
 
-    @Query("DELETE FROM movie_table WHERE trackId == :trackId")
+    @Query("SELECT * FROM movie_table WHERE trackId == :trackId")
     fun getMovie(trackId: Int): MovieEntity
 
     @Query("DELETE FROM movie_table WHERE liked != 1")
