@@ -20,10 +20,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             KINOTheme {
+
                 KinoApp()
             }
         }
     }
+}
+
+@Composable
+fun test() {
 }
 
 @Preview(showBackground = true)
