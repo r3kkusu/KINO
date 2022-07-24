@@ -93,7 +93,7 @@ fun Movie.toMovieEntity(): MovieEntity {
     )
 }
 
-fun MovieDto.toMovie(): Movie {
+fun MovieDto.toMovieModel(): Movie {
     return Movie(
         artistName = artistName,
         artworkUrl100 = artworkUrl100,

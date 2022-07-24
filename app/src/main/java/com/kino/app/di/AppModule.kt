@@ -2,7 +2,6 @@ package com.kino.app.di
 
 import android.app.Application
 import androidx.room.Room
-import com.kino.app.common.utils.Constants
 import com.kino.app.data.local.KINODatabase
 import com.kino.app.data.remote.KINOApi
 import dagger.Module

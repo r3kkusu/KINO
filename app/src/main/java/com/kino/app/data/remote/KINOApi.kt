@@ -1,6 +1,6 @@
 package com.kino.app.data.remote
 
-import okhttp3.ResponseBody
+import com.kino.app.data.remote.dto.ResultDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,5 +14,5 @@ interface KINOApi {
     suspend fun getMovies(
         @Query("term") term: String,
         @Query("country") country: String,
-    ): ResponseBody
+    ): ResultDto
 }
