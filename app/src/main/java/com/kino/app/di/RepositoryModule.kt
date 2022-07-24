@@ -1,9 +1,7 @@
 package com.kino.app.di
 
-import com.kino.app.data.repositories.KINOLocalRepoImpl
-import com.kino.app.data.repositories.KINORemoteRepoImpl
-import com.kino.app.domain.repositories.KINOLocalRepo
-import com.kino.app.domain.repositories.KINORemoteRepo
+import com.kino.app.data.repositories.KINORepoImpl
+import com.kino.app.domain.repositories.KINORepo
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,13 +14,7 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindKINOLocalRepo(
-        _KINOLocalRepo: KINOLocalRepoImpl
-    ): KINOLocalRepo
-
-    @Binds
-    @Singleton
-    abstract fun bindKINORemoteRepo(
-        _KINORemoteRepo: KINORemoteRepoImpl
-    ): KINORemoteRepo
+    abstract fun bindKINORepo(
+        kinoRepoImpl: KINORepoImpl
+    ): KINORepo
 }

@@ -1,8 +1,12 @@
 package com.kino.app.domain.repositories
 
 import com.kino.app.data.local.entity.MovieEntity
+import com.kino.app.data.remote.dto.ResultDto
 
-interface KINOLocalRepo {
+interface KINORepo {
+
+    suspend fun getMovies(term: String, country: String): ResultDto
+
     suspend fun insertMovie(movieEntities: List<MovieEntity>)
 
     suspend fun updateMovie(movieEntity: MovieEntity)

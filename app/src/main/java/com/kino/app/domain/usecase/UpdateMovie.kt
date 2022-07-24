@@ -4,13 +4,13 @@ import com.kino.app.common.Resource
 import com.kino.app.data.mapper.toMovieEntity
 import com.kino.app.data.mapper.toMovieModel
 import com.kino.app.domain.model.Movie
-import com.kino.app.domain.repositories.KINOLocalRepo
+import com.kino.app.domain.repositories.KINORepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
 
 class UpdateMovie(
-    private val localRepo: KINOLocalRepo
+    private val localRepo: KINORepo
 ) {
     operator fun invoke(movie: Movie): Flow<Resource<Movie>> {
         return flow {
