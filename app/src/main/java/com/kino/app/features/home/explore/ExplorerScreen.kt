@@ -1,9 +1,6 @@
 package com.kino.app.features.home.explore
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -31,7 +28,6 @@ fun ExplorerScreen() {
                 .padding(5.dp),
             textAlign = TextAlign.Center,
             text = stringResource(id = R.string.explore),
-            overflow = TextOverflow.Ellipsis,
             maxLines = 1,
             style = Typography.h1,
             fontWeight = FontWeight.Bold,
@@ -48,7 +44,7 @@ fun ExplorerScreen() {
 @Preview(showBackground = true)
 @Composable
 fun ExplorerPreview() {
-    Surface(modifier = Modifier.fillMaxHeight()) {
+    Surface(modifier = Modifier.fillMaxSize()) {
         ExplorerScreen()
     }
 }

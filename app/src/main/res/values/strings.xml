@@ -4,6 +4,7 @@
     <string name="search">Search</string>
     <string name="search_movie">Search Movies</string>
     <string name="explore">EXPLORE</string>
+    <string name="movie_detail">MOVIE DETAIL</string>
 
     <!-- STUB DATA   -->
     <string name="stub_title">Dickie Roberts: Former Child Star</string>
@@ -12,4 +13,12 @@
     <string name="stub_rating">M</string>
     <string name="stub_time">1h 30mins</string>
     <string name="stub_price">11.99 AUD</string>
+    <string name="stub_plot">
+        In the 1970\'s, Dickie Roberts held the keys to success as a child star with a hit TV series.
+        Now the only keys Dickie holds are the ones that start the customer\'s cars that he parks as a valet attendant for a Hollywood restaurant.
+        Desperate to revive his acting career, Dickie tries to audition for a role in Rob Reiner\'s new movie but the director doesn\'t believe Dickie is normal enough to play the part.
+        Determined to get the role, Dickie hires a "typical" family to give him the real-life upbringing he never had.
+        But once Dickie moves in, the family\'s life becomes anything but normal as Dickie unleashes his wild inner child…and learns in the process some unforgettable lessons about fame, fortune and family values.
+        Co-starring Mary McCormack, Jon Lovitz, Alyssa Milano and many former child stars including Danny Bonaduce, Barry Williams and Leif Garett.
+    </string>
 </resources>
