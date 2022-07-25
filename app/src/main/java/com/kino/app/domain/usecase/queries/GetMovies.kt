@@ -1,4 +1,4 @@
-package com.kino.app.domain.usecase
+package com.kino.app.domain.usecase.queries
 
 import com.kino.app.common.Resource
 import com.kino.app.data.mapper.toMovieEntity

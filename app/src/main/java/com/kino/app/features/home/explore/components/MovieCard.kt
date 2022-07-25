@@ -3,8 +3,12 @@ package com.kino.app.features.home.explore.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,6 +27,21 @@ fun MovieCard() {
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(start = 10.dp, top = 10.dp, end = 10.dp)) {
+
+        IconButton(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .offset(y = (-10).dp),
+            onClick = { /* TODO */ }
+        ) {
+            Icon(
+                modifier = Modifier.align(Alignment.Center),
+                painter = painterResource(id = R.drawable.ic_baseline_favorite_border_24),
+                contentDescription = stringResource(id = R.string.like),
+                tint = MaterialTheme.colors.primary
+            )
+        }
+
         Row(modifier = Modifier.height(IntrinsicSize.Max)) {
             Image(
                 modifier = Modifier
@@ -40,7 +59,7 @@ fun MovieCard() {
                 verticalArrangement = Arrangement.Center
                 ) {
                 Text(
-                    text = "Dickie Roberts: Former Child Star",
+                    text = stringResource(id = R.string.stub_title),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     style = Typography.body1,
@@ -48,7 +67,7 @@ fun MovieCard() {
                 )
                 
                 Text(
-                    text = "Comedy",
+                    text = stringResource(id = R.string.stub_genre),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     style = Typography.body1,
@@ -59,15 +78,15 @@ fun MovieCard() {
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Row {
-                    TextView(text = "2003")
+                    TextView(text = stringResource(id = R.string.stub_year))
                     Spacer(modifier = Modifier.width(2.dp))
                     TextView(text = "M")
                 }
 
                 Spacer(modifier = Modifier.height(4.dp))
-                TextView(text = "⏰ 1h 30mins")
+                TextView(text = "⏰ ${stringResource(id = R.string.stub_time)}")
                 Spacer(modifier = Modifier.height(4.dp))
-                TextView(text = "\uD83D\uDCB5 11.99 AUD")
+                TextView(text = "\uD83D\uDCB5 ${stringResource(id = R.string.stub_price)}")
             }
         }
     }
