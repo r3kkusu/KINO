@@ -1,4 +1,4 @@
-package com.kino.app.features.home.explore
+package com.kino.app.features.home.explore.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -21,12 +22,13 @@ import com.kino.app.ui.theme.Typography
 fun MovieCard() {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .padding(start = 10.dp, top = 5.dp, end = 10.dp)) {
+        .padding(start = 10.dp, top = 10.dp, end = 10.dp)) {
         Row(modifier = Modifier.height(IntrinsicSize.Max)) {
             Image(
                 modifier = Modifier
                     .size(110.dp, 170.dp)
                     .clip(RoundedCornerShape(20.dp)),
+                contentScale  = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.track_art_stub_100x100bb),
                 contentDescription = stringResource(id = R.string.movie_artwork)
             )

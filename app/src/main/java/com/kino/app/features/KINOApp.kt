@@ -5,7 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.kino.app.features.home.detail.DetailScreen
+import com.kino.app.features.home.liked.LikedScreen
 
 @Composable
 fun KinoApp() {
@@ -14,6 +14,6 @@ fun KinoApp() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
-        DetailScreen()
+        LikedScreen()
     }
 }

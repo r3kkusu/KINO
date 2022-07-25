@@ -2,9 +2,11 @@
     <string name="app_name">KINO</string>
     <string name="movie_artwork">Movie Artwork</string>
     <string name="search">Search</string>
+    <string name="like">like</string>
     <string name="search_movie">Search Movies</string>
-    <string name="explore">EXPLORE</string>
-    <string name="movie_detail">MOVIE DETAIL</string>
+    <string name="header_explore">EXPLORE</string>
+    <string name="header_movie_detail">MOVIE DETAIL</string>
+    <string name="header_liked">FAVORITES</string>
 
     <!-- STUB DATA   -->
     <string name="stub_title">Dickie Roberts: Former Child Star</string>
