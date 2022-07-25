@@ -2,23 +2,16 @@ package com.kino.app.data.repositories
 
 import com.kino.app.data.local.KINODatabase
 import com.kino.app.data.local.entity.MovieEntity
-import com.kino.app.data.remote.KINOApi
-import com.kino.app.data.remote.dto.ResultDto
-import com.kino.app.domain.repositories.KINORepo
+import com.kino.app.domain.repositories.KINODbRepo
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
-class KINORepoImpl @Inject constructor(
-    private val api: KINOApi,
+class KINODbRepoImpl @Inject constructor(
     private val db: KINODatabase,
-) : KINORepo {
-
+) : KINODbRepo {
     private val dao = db.dao
-
-    override suspend fun getMovies(term: String, country: String): ResultDto {
-        return api.getMovies(term, country)
-    }
 
     override suspend fun insertMovie(movieEntities: List<MovieEntity>) {
         dao.insertMovie(movieEntities)
@@ -47,5 +40,4 @@ class KINORepoImpl @Inject constructor(
     override suspend fun clearMovies() {
         dao.clearMovies()
     }
-
 }
