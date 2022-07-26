@@ -7,7 +7,7 @@ class AppUtils {
         fun GenreListToString(genres: List<Genre>) : String {
             var gerne = ""
             genres.forEachIndexed { i, elem ->
-                gerne += "${elem.name} ${if (i < genres.size) "," else ""}"
+                gerne += "${elem.name} ${if (i < (genres.size - 1)) ", " else ""}"
             }
             return gerne
         }

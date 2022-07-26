@@ -13,7 +13,9 @@ interface KINODbRepo {
 
     fun getMovies(liked: Boolean): List<MovieEnt>
 
-    fun getMovie(_id: String): MovieEnt
+    fun getMovies(title: String): List<MovieEnt>
+
+    fun getMovie(id: String): MovieEnt
 
     suspend fun clearMovies()
 }

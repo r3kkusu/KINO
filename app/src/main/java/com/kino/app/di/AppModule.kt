@@ -8,6 +8,7 @@ import com.kino.app.domain.repositories.KINOApiRepo
 import com.kino.app.domain.repositories.KINODbRepo
 import com.kino.app.domain.usecase.ExploreUseCase
 import com.kino.app.domain.usecase.queries.GetMovies
+import com.kino.app.domain.usecase.queries.SearchMovies
 import com.kino.app.domain.usecase.queries.UpdateMovie
 import dagger.Module
 import dagger.Provides
@@ -53,7 +54,8 @@ object AppModule {
     ): ExploreUseCase {
         return ExploreUseCase(
             getMovies = GetMovies(dbRepo, apiRepo),
-            updateMovie = UpdateMovie(dbRepo)
+            updateMovie = UpdateMovie(dbRepo),
+            searchMovies = SearchMovies(dbRepo)
         )
     }
 }

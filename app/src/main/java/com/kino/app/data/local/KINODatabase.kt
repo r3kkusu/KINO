@@ -19,7 +19,7 @@ import com.kino.app.data.local.entities.MovieEnt
         EmbedUrlEnt::class,
         GenreEnt::class
     ],
-    version = 5
+    version = 1
 )
 @TypeConverters(
     StringConverter::class,

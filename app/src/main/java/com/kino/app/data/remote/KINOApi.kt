@@ -8,8 +8,8 @@ interface KINOApi {
 
     companion object {
         const val BASE_URL = "https://movies-app1.p.rapidapi.com"
-        const val RAPID_KEY = "5ddce70e9cmsha854eb44f72970bp102964jsn446b6b65fa62"
-        const val RAPID_HOST = "movies-app1.p.rapidapi.com"
+        const val RAPID_KEY = ""
+        const val RAPID_HOST = ""
     }
 
     @Headers(
