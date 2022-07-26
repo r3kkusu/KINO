@@ -16,13 +16,13 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindKINORepo(
+    abstract fun bindKINODbRepo(
         kinoDbRepoImpl: KINODbRepoImpl
     ): KINODbRepo
 
     @Binds
     @Singleton
-    abstract fun bindKINORepo(
+    abstract fun bindKINOApiRepo(
         kinoApiRepoImpl: KINOApiRepoImpl
     ): KINOApiRepo
 }

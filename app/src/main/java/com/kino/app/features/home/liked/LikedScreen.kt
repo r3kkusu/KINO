@@ -34,7 +34,9 @@ fun LikedScreen() {
             style = Typography.h1,
             fontWeight = FontWeight.Bold,
         )
-        SearchField()
+        SearchField(onValueChange = {
+
+        })
         LazyColumn {
             items(movies.size) {
                 MovieItem()

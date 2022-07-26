@@ -1,4 +1,4 @@
-package com.kino.app.common.utils
+package com.kino.app.common
 
 class Constants {
     companion object {}

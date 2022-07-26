@@ -11,15 +11,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.kino.app.R
 import com.kino.app.features.home.explore.components.MovieCard
 import com.kino.app.features.home.explore.components.SearchField
 import com.kino.app.ui.theme.Typography
 
 @Composable
-fun ExplorerScreen() {
+fun ExplorerScreen(
+    viewModel: ExploreViewModel = hiltViewModel()
+) {
+    val state = viewModel.state
 
-    val movies = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     Column {
         Text(
             modifier = Modifier
@@ -31,10 +34,10 @@ fun ExplorerScreen() {
             style = Typography.h1,
             fontWeight = FontWeight.Bold,
         )
-        SearchField()
+        SearchField(onValueChange = { term -> viewModel.onEvent(ExplorerEvent.Search(term)) })
         LazyColumn {
-            items(movies.size) {
-                MovieCard()
+            items(state.movies.size) { position ->
+                MovieCard(state.movies[position])
             }
         }
     }

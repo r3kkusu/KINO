@@ -1,8 +1,8 @@
 package com.kino.app.domain.usecase.queries
 
 import com.kino.app.common.Resource
-import com.kino.app.data.mapper.toMovieEntity
-import com.kino.app.data.mapper.toMovieModel
+import com.kino.app.data.mapper.toMovie
+import com.kino.app.data.mapper.toMovieEnt
 import com.kino.app.domain.model.Movie
 import com.kino.app.domain.repositories.KINOApiRepo
 import com.kino.app.domain.repositories.KINODbRepo
@@ -16,10 +16,10 @@ class GetMovies(
     private val kinoApiRepo: KINOApiRepo
 
 ) {
-    operator fun invoke(term: String, country: String) : Flow<Resource<List<Movie>>> = flow {
+    operator fun invoke() : Flow<Resource<List<Movie>>> = flow {
         emit(Resource.Loading(true))
         val remoteMovies = try {
-            kinoApiRepo.getMovies(term, country)
+            kinoApiRepo.getMovies()
         } catch(e: IOException) {
             e.printStackTrace()
             emit(Resource.Error("Couldn't load data"))
@@ -33,10 +33,10 @@ class GetMovies(
         remoteMovies?.let { movies ->
             kinoDbRepo.clearMovies()
             kinoDbRepo.insertMovie(
-                movies.results.map { it.toMovieModel().toMovieEntity() }
+                movies.results.map { it.toMovie().toMovieEnt() }
             )
             emit(Resource.Success(
-                data = kinoDbRepo.getMovies().map { it.toMovieModel() }
+                data = kinoDbRepo.getMovies().map { it.toMovie() }
             ))
             emit(Resource.Loading(false))
         }

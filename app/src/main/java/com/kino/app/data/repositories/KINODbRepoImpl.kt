@@ -1,7 +1,7 @@
 package com.kino.app.data.repositories
 
 import com.kino.app.data.local.KINODatabase
-import com.kino.app.data.local.entity.MovieEntity
+import com.kino.app.data.local.entities.MovieEnt
 import com.kino.app.domain.repositories.KINODbRepo
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,28 +13,28 @@ class KINODbRepoImpl @Inject constructor(
 ) : KINODbRepo {
     private val dao = db.dao
 
-    override suspend fun insertMovie(movieEntities: List<MovieEntity>) {
-        dao.insertMovie(movieEntities)
+    override suspend fun insertMovie(movieEnts: List<MovieEnt>) {
+        dao.insertMovies(movieEnts)
     }
 
-    override suspend fun updateMovie(movieEntity: MovieEntity) {
-        dao.updateMovie(movieEntity)
+    override suspend fun updateMovie(movieEnt: MovieEnt) {
+        dao.updateMovie(movieEnt)
     }
 
-    override suspend fun deleteMovie(movieEntity: MovieEntity) {
-        dao.deleteMovie(movieEntity)
+    override suspend fun deleteMovie(movieEnt: MovieEnt) {
+        dao.deleteMovie(movieEnt)
     }
 
-    override fun getMovies(): List<MovieEntity> {
+    override fun getMovies(): List<MovieEnt> {
         return dao.getMovies()
     }
 
-    override fun getMovies(liked: Boolean): List<MovieEntity> {
+    override fun getMovies(liked: Boolean): List<MovieEnt> {
         return dao.getMovies(liked)
     }
 
-    override fun getMovie(trackId: Int): MovieEntity {
-        return dao.getMovie(trackId)
+    override fun getMovie(_id: String): MovieEnt {
+        return dao.getMovie(_id)
     }
 
     override suspend fun clearMovies() {

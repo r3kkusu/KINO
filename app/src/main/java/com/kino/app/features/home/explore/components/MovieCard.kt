@@ -18,12 +18,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.kino.app.R
-import com.kino.app.features.home.explore.components.TextView
+import com.kino.app.common.utils.AppUtils
+import com.kino.app.common.utils.DateUtils
+import com.kino.app.domain.model.Movie
 import com.kino.app.ui.theme.Typography
+import java.util.*
 
 @Composable
-fun MovieCard() {
+fun MovieCard(movie: Movie) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(start = 10.dp, top = 10.dp, end = 10.dp)) {
@@ -36,7 +40,12 @@ fun MovieCard() {
         ) {
             Icon(
                 modifier = Modifier.align(Alignment.Center),
-                painter = painterResource(id = R.drawable.ic_baseline_favorite_border_24),
+                painter = painterResource(
+                    id = if (movie.liked == true)
+                        R.drawable.ic_baseline_favorite_24
+                    else
+                        R.drawable.ic_baseline_favorite_border_24
+                ),
                 contentDescription = stringResource(id = R.string.like),
                 tint = MaterialTheme.colors.primary
             )
@@ -48,18 +57,18 @@ fun MovieCard() {
                     .size(110.dp, 170.dp)
                     .clip(RoundedCornerShape(20.dp)),
                 contentScale  = ContentScale.Crop,
-                painter = painterResource(id = R.drawable.track_art_stub_100x100bb),
+                painter = rememberAsyncImagePainter(movie.image),
                 contentDescription = stringResource(id = R.string.movie_artwork)
             )
             Column(
                 modifier = Modifier
-                    .padding(start = 10.dp, end = 10.dp)
+                    .padding(start = 10.dp, end = 25.dp)
                     .fillMaxHeight()
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.Center
                 ) {
                 Text(
-                    text = stringResource(id = R.string.stub_title),
+                    text = movie.titleOriginal ?: stringResource(id = R.string.stub_data),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     style = Typography.body1,
@@ -67,7 +76,7 @@ fun MovieCard() {
                 )
                 
                 Text(
-                    text = stringResource(id = R.string.stub_genre),
+                    text = AppUtils.GenreListToString(movie.genres) ?: stringResource(id = R.string.stub_data),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     style = Typography.body1,
@@ -78,15 +87,15 @@ fun MovieCard() {
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Row {
-                    TextView(text = stringResource(id = R.string.stub_year))
+                    TextView(text = movie.year ?: stringResource(id = R.string.stub_data))
                     Spacer(modifier = Modifier.width(2.dp))
-                    TextView(text = "M")
+                    TextView(text = "⭐ ${movie.rating}" ?: stringResource(id = R.string.stub_data))
                 }
 
                 Spacer(modifier = Modifier.height(4.dp))
-                TextView(text = "⏰ ${stringResource(id = R.string.stub_time)}")
+                TextView(text = "⏰ ${/*DateUtils.format(movie.trackTimeMillis!!.toLong(), DateUtils.DATE_FORMAT_5) ?:*/ stringResource(id = R.string.stub_data)}")
                 Spacer(modifier = Modifier.height(4.dp))
-                TextView(text = "\uD83D\uDCB5 ${stringResource(id = R.string.stub_price)}")
+                TextView(text = "\uD83D\uDCB5 ${/*movie.trackPrice ?:*/ stringResource(id = R.string.stub_data)} US")
             }
         }
     }

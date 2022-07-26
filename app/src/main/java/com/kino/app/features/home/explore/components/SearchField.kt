@@ -19,7 +19,7 @@ import com.kino.app.R
 import com.kino.app.ui.theme.Typography
 
 @Composable
-fun SearchField() {
+fun SearchField(onValueChange: (text: String) -> Unit) {
     val text = remember { mutableStateOf(TextFieldValue()) }
     Box(modifier = Modifier
         .padding(top = 5.dp, bottom = 5.dp, start = 25.dp, end = 25.dp)
@@ -27,7 +27,10 @@ fun SearchField() {
 
         OutlinedTextField(
             value = text.value,
-            onValueChange = { text.value = it },
+            onValueChange = {
+                text.value = it
+                onValueChange(it.text)
+                            },
             placeholder = {
                 Text(
                     stringResource(

@@ -9,6 +9,7 @@
     <string name="header_liked">FAVORITES</string>
 
     <!-- STUB DATA   -->
+    <string name="stub_data">stub</string>
     <string name="stub_title">Dickie Roberts: Former Child Star</string>
     <string name="stub_genre">Comedy, Sci-Fi</string>
     <string name="stub_year">2003</string>

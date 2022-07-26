@@ -12,7 +12,7 @@ class KINOApiRepoImpl @Inject constructor(
     private val api: KINOApi
 ) : KINOApiRepo {
 
-    override suspend fun getMovies(term: String, country: String): ResultDto {
-        return api.getMovies(term, country)
+    override suspend fun getMovies(): ResultDto {
+        return api.getMovies()
     }
 }

@@ -4,6 +4,11 @@ import android.app.Application
 import androidx.room.Room
 import com.kino.app.data.local.KINODatabase
 import com.kino.app.data.remote.KINOApi
+import com.kino.app.domain.repositories.KINOApiRepo
+import com.kino.app.domain.repositories.KINODbRepo
+import com.kino.app.domain.usecase.ExploreUseCase
+import com.kino.app.domain.usecase.queries.GetMovies
+import com.kino.app.domain.usecase.queries.UpdateMovie
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +43,17 @@ object AppModule {
             KINODatabase::class.java,
             KINODatabase.DATABASE_NAME
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideExploreCases(
+        dbRepo : KINODbRepo,
+        apiRepo : KINOApiRepo
+    ): ExploreUseCase {
+        return ExploreUseCase(
+            getMovies = GetMovies(dbRepo, apiRepo),
+            updateMovie = UpdateMovie(dbRepo)
+        )
     }
 }

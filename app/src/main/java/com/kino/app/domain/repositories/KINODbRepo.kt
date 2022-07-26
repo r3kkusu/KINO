@@ -1,19 +1,19 @@
 package com.kino.app.domain.repositories
 
-import com.kino.app.data.local.entity.MovieEntity
+import com.kino.app.data.local.entities.MovieEnt
 
 interface KINODbRepo {
-    suspend fun insertMovie(movieEntities: List<MovieEntity>)
+    suspend fun insertMovie(movieEnts: List<MovieEnt>)
 
-    suspend fun updateMovie(movieEntity: MovieEntity)
+    suspend fun updateMovie(movieEnt: MovieEnt)
 
-    suspend fun deleteMovie(movieEntity: MovieEntity)
+    suspend fun deleteMovie(movieEnt: MovieEnt)
 
-    fun getMovies(): List<MovieEntity>
+    fun getMovies(): List<MovieEnt>
 
-    fun getMovies(liked: Boolean): List<MovieEntity>
+    fun getMovies(liked: Boolean): List<MovieEnt>
 
-    fun getMovie(trackId: Int): MovieEntity
+    fun getMovie(_id: String): MovieEnt
 
     suspend fun clearMovies()
 }
