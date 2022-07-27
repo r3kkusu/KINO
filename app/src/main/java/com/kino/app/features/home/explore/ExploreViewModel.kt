@@ -10,10 +10,9 @@ import com.kino.app.common.Resource
 import com.kino.app.domain.model.Movie
 import com.kino.app.domain.usecase.ExploreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,13 +21,15 @@ class ExploreViewModel @Inject constructor(
     ) : ViewModel() {
 
     var state by mutableStateOf(ExplorerState())
+    var job : Job? = null
 
     init {
         getMovies()
     }
 
     private fun getMovies() {
-        viewModelScope.launch(Dispatchers.IO) {
+        job?.cancel() // Cancel previous process
+        job = viewModelScope.launch(Dispatchers.IO) {
             useCase.getMovies()
                 .collect { result ->
                     withContext(Dispatchers.Main) {
@@ -48,10 +49,12 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
+    @OptIn(FlowPreview::class)
     private fun searchMovies(title: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        job?.cancel() // Cancel previous process
+        job = viewModelScope.launch(Dispatchers.IO) {
+            delay(200) // Avoid continues queries
             useCase.searchMovies(title)
-//                .debounce(200)
                 .collect { result ->
                     withContext(Dispatchers.Main) {
                         when(result) {
@@ -71,16 +74,18 @@ class ExploreViewModel @Inject constructor(
     }
 
     private fun likedMovie(movie: Movie) {
-        viewModelScope.launch(Dispatchers.IO) {
-            movie.liked = true // liked
+        job?.cancel() // Cancel previous process
+        job = viewModelScope.launch(Dispatchers.IO) {
             useCase.updateMovie(movie)
                 .collect { result ->
                     withContext(Dispatchers.Main) {
                         when(result) {
                             is Resource.Success -> {
-//                                result.data?.let { movies ->
-//                                    state = state.copy(movies = movies)
-//                                }
+                                val movies = emptyList<Movie>().toMutableList()
+                                state.movies.forEach {
+                                    movies.add(if (it._id == movie._id) movie else it)
+                                }
+                                state = state.copy(movies = movies)
                             }
                             is Resource.Error -> Unit
                             is Resource.Loading -> {

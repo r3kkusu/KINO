@@ -37,7 +37,14 @@ fun ExplorerScreen(
         SearchField(onValueChange = { term -> viewModel.onEvent(ExplorerEvent.Search(term)) })
         LazyColumn {
             items(state.movies.size) { position ->
-                MovieCard(state.movies[position])
+                val movie = state.movies[position]
+                MovieCard(
+                    movie = movie,
+                    onLikedButtonClick = {  liked ->
+                        movie.liked = liked
+                        viewModel.onEvent(ExplorerEvent.LikeMovie(movie))
+                    }
+                )
             }
         }
     }

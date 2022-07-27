@@ -28,7 +28,7 @@ interface KINODao {
     @Query("SELECT * FROM movie_table WHERE _id == :id")
     fun getMovie(id: String): MovieEnt
 
-    @Query("SELECT * FROM movie_table WHERE title LIKE '%' || :title || '%'")
+    @Query("SELECT * FROM movie_table WHERE titleOriginal LIKE '%' || :title || '%'")
     fun getMovies(title: String): List<MovieEnt>
 
     @Query("DELETE FROM movie_table WHERE liked != 1")
