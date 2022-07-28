@@ -3,10 +3,7 @@ package com.kino.app.features.home.explore.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,11 +14,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.kino.app.R
 import com.kino.app.common.utils.AppUtils
 import com.kino.app.domain.model.Movie
+import com.kino.app.features.home.explore.ExplorerScreen
 import com.kino.app.ui.theme.Typography
 
 @Composable
@@ -103,4 +102,10 @@ fun MovieCard(movie: Movie, onLikedButtonClick: (liked: Boolean) -> Unit) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MovieCardPreview() {
+    MovieCard(Movie.stub()) {}
 }

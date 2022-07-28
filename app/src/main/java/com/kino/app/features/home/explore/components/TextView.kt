@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kino.app.ui.theme.Typography
 
@@ -21,4 +22,10 @@ fun TextView(text: String) {
         text = text,
         style = Typography.body2,
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TextViewPreview() {
+    TextView("Sample")
 }

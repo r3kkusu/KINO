@@ -5,4 +5,10 @@ data class EmbedUrl(
     var priority: Int,
     var server: String,
     var url: String
-)
+) {
+    companion object {
+        fun stub() : EmbedUrl {
+            return EmbedUrl(1, 4, "fembed", "https://dutrag.com/v/1ezegcjmn787gd6")
+        }
+    }
+}
