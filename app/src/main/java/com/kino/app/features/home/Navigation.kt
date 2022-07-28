@@ -19,7 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.kino.app.common.Constants
 import com.kino.app.domain.model.NavigationRoute
 import com.kino.app.features.home.explore.ExplorerScreen
-import com.kino.app.features.home.liked.LikedScreen
+import com.kino.app.features.home.favorite.LikedScreen
 import com.kino.app.ui.theme.Purple200
 
 

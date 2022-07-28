@@ -37,6 +37,10 @@ class KINODbRepoImpl @Inject constructor(
         return dao.getMovies(title)
     }
 
+    override fun getMovies(title: String, liked: Boolean): List<MovieEnt> {
+        return dao.getMovies(title, liked)
+    }
+
     override fun getMovie(id: String): MovieEnt {
         return dao.getMovie(id)
     }

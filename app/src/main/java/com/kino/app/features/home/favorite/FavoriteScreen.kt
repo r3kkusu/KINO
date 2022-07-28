@@ -1,4 +1,4 @@
-package com.kino.app.features.home.liked
+package com.kino.app.features.home.favorite
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,15 +14,32 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.kino.app.R
+import com.kino.app.domain.model.Movie
 import com.kino.app.features.home.explore.components.SearchField
-import com.kino.app.features.home.liked.components.MovieItem
+import com.kino.app.features.home.favorite.components.MovieItem
 import com.kino.app.ui.theme.Typography
 
 @Composable
-fun LikedScreen() {
+fun LikedScreen(
+    viewModel: FavoriteViewModel = hiltViewModel()
+) {
+    val state = viewModel.state
 
-    val movies = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
+    var dou = emptyList<Movie>().toMutableList()
+    val group = emptyList<List<Movie>>().toMutableList()
+    state.movies.iterator().forEach {
+        dou += it
+        if (dou.size == 2) {
+            group += dou
+            dou = emptyList<Movie>().toMutableList()
+        }
+    }
+
+    if (dou.isNotEmpty())
+        group += dou
+
     Column {
         Text(
             modifier = Modifier
@@ -34,12 +51,13 @@ fun LikedScreen() {
             style = Typography.h1,
             fontWeight = FontWeight.Bold,
         )
-        SearchField(onValueChange = {
-
-        })
+        SearchField(onValueChange = { term -> viewModel.onEvent(FavoriteEvent.Search(term)) })
         LazyColumn {
-            items(movies.size) {
-                MovieItem()
+            items(group.size) { position ->
+                val movies = group[position]
+                MovieItem(movies) {
+                    viewModel.onEvent(FavoriteEvent.LikeMovie(it))
+                }
             }
         }
     }

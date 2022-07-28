@@ -7,9 +7,8 @@ import com.kino.app.data.remote.KINOApi
 import com.kino.app.domain.repositories.KINOApiRepo
 import com.kino.app.domain.repositories.KINODbRepo
 import com.kino.app.domain.usecase.ExploreUseCase
-import com.kino.app.domain.usecase.queries.GetMovies
-import com.kino.app.domain.usecase.queries.SearchMovies
-import com.kino.app.domain.usecase.queries.UpdateMovie
+import com.kino.app.domain.usecase.FavoriteUseCase
+import com.kino.app.domain.usecase.queries.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,6 +53,19 @@ object AppModule {
     ): ExploreUseCase {
         return ExploreUseCase(
             getMovies = GetMovies(dbRepo, apiRepo),
+            updateMovie = UpdateMovie(dbRepo),
+            searchMovies = SearchMovies(dbRepo)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoriteCases(
+        dbRepo : KINODbRepo,
+        apiRepo : KINOApiRepo
+    ): FavoriteUseCase {
+        return FavoriteUseCase(
+            getLikeMovies = GetLikeMovies(dbRepo),
             updateMovie = UpdateMovie(dbRepo),
             searchMovies = SearchMovies(dbRepo)
         )

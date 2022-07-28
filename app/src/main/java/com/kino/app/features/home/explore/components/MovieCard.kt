@@ -71,7 +71,7 @@ fun MovieCard(movie: Movie, onLikedButtonClick: (liked: Boolean) -> Unit) {
                 verticalArrangement = Arrangement.Center
                 ) {
                 Text(
-                    text = movie.titleOriginal ?: stringResource(id = R.string.stub_data),
+                    text = movie.titleOriginal,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     style = Typography.body1,
@@ -79,7 +79,7 @@ fun MovieCard(movie: Movie, onLikedButtonClick: (liked: Boolean) -> Unit) {
                 )
                 
                 Text(
-                    text = AppUtils.GenreListToString(movie.genres) ?: stringResource(id = R.string.stub_data),
+                    text = AppUtils.GenreListToString(movie.genres),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     style = Typography.body1,
@@ -90,9 +90,9 @@ fun MovieCard(movie: Movie, onLikedButtonClick: (liked: Boolean) -> Unit) {
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Row {
-                    TextView(text = movie.year ?: stringResource(id = R.string.stub_data))
+                    TextView(text = movie.year)
                     Spacer(modifier = Modifier.width(2.dp))
-                    TextView(text = "⭐ ${movie.rating}" ?: stringResource(id = R.string.stub_data))
+                    TextView(text = "⭐ ${movie.rating}")
                 }
 
                 Spacer(modifier = Modifier.height(4.dp))

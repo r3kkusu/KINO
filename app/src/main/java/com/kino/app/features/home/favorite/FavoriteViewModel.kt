@@ -1,4 +1,4 @@
-package com.kino.app.features.home.explore
+package com.kino.app.features.home.favorite
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,27 +7,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kino.app.common.Resource
 import com.kino.app.domain.model.Movie
-import com.kino.app.domain.usecase.ExploreUseCase
+import com.kino.app.domain.usecase.FavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
-class ExploreViewModel @Inject constructor(
-    private val useCase: ExploreUseCase
-    ) : ViewModel() {
+class FavoriteViewModel @Inject constructor(private val useCase: FavoriteUseCase
+) : ViewModel() {
 
-    var state by mutableStateOf(ExplorerState())
+    var state by mutableStateOf(FavoriteState())
     var job : Job? = null
 
     init {
-        getMovies()
+        getLikeMovies()
     }
 
-    private fun getMovies() {
+    private fun getLikeMovies() {
         job?.cancel() // Cancel previous process
         job = viewModelScope.launch(Dispatchers.IO) {
-            useCase.getMovies()
+            useCase.getLikeMovies(liked = true) // Set to true to get only liked movies
                 .collect { result ->
                     withContext(Dispatchers.Main) {
                         when(result) {
@@ -51,7 +50,7 @@ class ExploreViewModel @Inject constructor(
         job?.cancel() // Cancel previous process
         job = viewModelScope.launch(Dispatchers.IO) {
             delay(200) // Avoid continues queries
-            useCase.searchMovies(title)
+            useCase.searchMovies(title, liked = true) // Search for movies liked by user
                 .collect { result ->
                     withContext(Dispatchers.Main) {
                         when(result) {
@@ -78,11 +77,7 @@ class ExploreViewModel @Inject constructor(
                     withContext(Dispatchers.Main) {
                         when(result) {
                             is Resource.Success -> {
-                                val movies = emptyList<Movie>().toMutableList()
-                                state.movies.forEach {
-                                    movies.add(if (it._id == movie._id) movie else it)
-                                }
-                                state = state.copy(movies = movies)
+                                getLikeMovies() // Reload data
                             }
                             is Resource.Error -> Unit
                             is Resource.Loading -> {
@@ -94,12 +89,12 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    fun onEvent(event: ExplorerEvent) {
+    fun onEvent(event: FavoriteEvent) {
         when(event) {
-            is ExplorerEvent.Search -> {
+            is FavoriteEvent.Search -> {
                 searchMovies(title = event.title)
             }
-            is ExplorerEvent.LikeMovie -> {
+            is FavoriteEvent.LikeMovie -> {
                 likedMovie(movie = event.movie)
             }
         }

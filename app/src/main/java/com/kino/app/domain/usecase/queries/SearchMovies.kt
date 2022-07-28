@@ -14,12 +14,18 @@ import java.io.IOException
 class SearchMovies(
     private val kinoDbRepo: KINODbRepo
 ) {
-    operator fun invoke(title: String) : Flow<Resource<List<Movie>>> = flow {
+    operator fun invoke(title: String, liked: Boolean? = null) : Flow<Resource<List<Movie>>> = flow {
         emit(Resource.Loading(true))
         val localMovies = try {
-            if (title.isEmpty())
-                kinoDbRepo.getMovies().map { it.toMovie() }
-            else kinoDbRepo.getMovies(title).map { it.toMovie() }
+            if (liked != null) {
+                if (title.isEmpty())
+                    kinoDbRepo.getMovies(liked = true).map { it.toMovie() }
+                else kinoDbRepo.getMovies(title, liked = true).map { it.toMovie() }
+            } else {
+                if (title.isEmpty())
+                    kinoDbRepo.getMovies().map { it.toMovie() }
+                else kinoDbRepo.getMovies(title).map { it.toMovie() }
+            }
         } catch(e: IOException) {
             e.printStackTrace()
             emit(Resource.Error("Couldn't load data"))
