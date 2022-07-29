@@ -1,6 +1,7 @@
 package com.kino.app.features.home.explore.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -24,13 +25,19 @@ import com.kino.app.features.home.explore.ExplorerScreen
 import com.kino.app.ui.theme.Typography
 
 @Composable
-fun MovieCard(movie: Movie, onLikedButtonClick: (liked: Boolean) -> Unit) {
+fun MovieCard(
+    movie: Movie,
+    onLikedButtonClick: (liked: Boolean) -> Unit,
+    onSelect: () -> Unit
+    ) {
 
     var isLiked by remember { mutableStateOf(movie.liked) }
 
     Box(modifier = Modifier
         .fillMaxWidth()
-        .padding(start = 10.dp, top = 10.dp, end = 10.dp)) {
+        .padding(start = 10.dp, top = 10.dp, end = 10.dp)
+        .clickable { onSelect() },
+    ) {
 
         IconButton(
             modifier = Modifier
@@ -107,5 +114,5 @@ fun MovieCard(movie: Movie, onLikedButtonClick: (liked: Boolean) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun MovieCardPreview() {
-    MovieCard(Movie.stub()) {}
+    MovieCard(Movie.stub(), {}) {}
 }

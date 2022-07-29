@@ -10,12 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kino.app.ui.theme.Typography
+import com.kino.app.R
+import com.kino.app.domain.model.Movie
 
 @Composable
-fun LikedButton() {
+fun LikedButton(liked: Boolean, onButtonClick: (liked: Boolean) -> Unit) {
     Column {
         IconButton(
             modifier = Modifier
@@ -23,10 +27,14 @@ fun LikedButton() {
                 .width(150.dp)
                 .height(IntrinsicSize.Max)
                 .background(MaterialTheme.colors.primary),
-            onClick = { /*TODO*/ },
+            onClick = { onButtonClick(!liked) },
         ) {
             Text(
-                text = "LIKE",
+                text = (
+                            if (liked)
+                                stringResource(id = R.string.liked)
+                            else stringResource(id = R.string.like)
+                        ).uppercase(),
                 style = Typography.h3,
                 color = Color.White,
                 fontSize = 18.sp
@@ -35,4 +43,10 @@ fun LikedButton() {
 
         Spacer(modifier = Modifier.height(15.dp))
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LikeButtonPreview() {
+    LikedButton(false) {}
 }

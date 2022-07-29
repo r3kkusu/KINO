@@ -12,13 +12,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.kino.app.R
+import com.kino.app.common.Constants
 import com.kino.app.features.home.explore.components.MovieCard
 import com.kino.app.features.home.explore.components.SearchField
 import com.kino.app.ui.theme.Typography
 
 @Composable
 fun ExplorerScreen(
+    navController: NavController? = null,
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
@@ -44,7 +47,9 @@ fun ExplorerScreen(
                         movie.liked = liked
                         viewModel.onEvent(ExplorerEvent.LikeMovie(movie))
                     }
-                )
+                ) {
+                    navController?.navigate("${Constants.NAVIGATION_ROUTES["detail"]!!.name}/${movie._id}")
+                }
             }
         }
     }

@@ -9,21 +9,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.kino.app.domain.model.Movie
 
 @Composable
-fun MovieItem(movies: List<Movie>, onLikedButtonClick: (movie: Movie) -> Unit) {
+fun MovieItem(
+        movies: List<Movie>,
+        onLikedButtonClick: (movie: Movie) -> Unit,
+        onSelectItem: (movieId: String) -> Unit
+    ) {
 
     Row(modifier = Modifier.fillMaxWidth()) {
 
         Box(modifier = Modifier
             .fillMaxWidth()
-            .weight(1f)) {
-            MovieCard(movies[0], onLikedButtonClick)
+            .weight(1f)
+        ) {
+            MovieCard(movies[0], onLikedButtonClick, onSelectItem)
         }
 
         Box(modifier = Modifier
             .fillMaxWidth()
             .weight(1f)) {
             if (movies.size == 2) {
-                MovieCard(movies[1], onLikedButtonClick)
+                MovieCard(movies[1], onLikedButtonClick, onSelectItem)
             }
         }
     }
@@ -34,5 +39,5 @@ fun MovieItem(movies: List<Movie>, onLikedButtonClick: (movie: Movie) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun MovieItemPreview() {
-    MovieItem(listOf(Movie.stub())) {}
+    MovieItem(listOf(Movie.stub()), {}, {})
 }

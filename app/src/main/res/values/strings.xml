@@ -3,6 +3,8 @@
     <string name="movie_artwork">Movie Artwork</string>
     <string name="search">Search</string>
     <string name="like">like</string>
+    <string name="liked">liked</string>
+    <string name="back">back</string>
     <string name="search_movie">Search Movies</string>
     <string name="header_explore">EXPLORE</string>
     <string name="header_movie_detail">MOVIE DETAIL</string>

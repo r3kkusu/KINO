@@ -1,6 +1,8 @@
 package com.kino.app.features.home.favorite.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -23,9 +25,13 @@ import com.kino.app.domain.model.Movie
 import com.kino.app.ui.theme.Typography
 
 @Composable
-fun MovieCard(movie: Movie, onLikedButtonClick: (movie: Movie) -> Unit) {
+fun MovieCard(
+    movie: Movie,
+    onLikedButtonClick: (movie: Movie) -> Unit,
+    onSelectItem: (movieId: String) -> Unit
+) {
 
-    Box {
+    Box(modifier = Modifier.clickable { onSelectItem(movie._id) }) {
         IconButton(
             modifier = Modifier.align(Alignment.TopEnd)
                 .offset(y = (-10).dp),
@@ -86,5 +92,5 @@ fun MovieCard(movie: Movie, onLikedButtonClick: (movie: Movie) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun MovieCardPreview() {
-    MovieCard(Movie.stub()) {}
+    MovieCard(Movie.stub(), {}, {})
 }

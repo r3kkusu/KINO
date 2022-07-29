@@ -6,6 +6,7 @@ import com.kino.app.data.local.KINODatabase
 import com.kino.app.data.remote.KINOApi
 import com.kino.app.domain.repositories.KINOApiRepo
 import com.kino.app.domain.repositories.KINODbRepo
+import com.kino.app.domain.usecase.DetailsUseCase
 import com.kino.app.domain.usecase.ExploreUseCase
 import com.kino.app.domain.usecase.FavoriteUseCase
 import com.kino.app.domain.usecase.queries.*
@@ -61,13 +62,23 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFavoriteCases(
-        dbRepo : KINODbRepo,
-        apiRepo : KINOApiRepo
+        dbRepo : KINODbRepo
     ): FavoriteUseCase {
         return FavoriteUseCase(
             getLikeMovies = GetLikeMovies(dbRepo),
             updateMovie = UpdateMovie(dbRepo),
             searchMovies = SearchMovies(dbRepo)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailsCases(
+        dbRepo : KINODbRepo
+    ): DetailsUseCase {
+        return DetailsUseCase(
+            getMovie = GetMovie(dbRepo),
+            updateMovie = UpdateMovie(dbRepo),
         )
     }
 }

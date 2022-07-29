@@ -11,13 +11,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.kino.app.R
+import com.kino.app.domain.model.Movie
 import com.kino.app.features.home.detail.components.LikedButton
 import com.kino.app.features.home.detail.components.MovieContent
 import com.kino.app.ui.theme.Typography
 
 @Composable
-fun DetailScreen() {
+fun DetailScreen(
+    navController: NavController? = null,
+    viewModel: DetailsViewModel = hiltViewModel()
+) {
+
+    val state = viewModel.state
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -34,27 +42,34 @@ fun DetailScreen() {
 
         IconButton(
             modifier = Modifier.padding(10.dp),
-            onClick = { /* TODO */ },
-
+            onClick = {
+//                navController?.backQueue?.last()?.id
+                navController?.popBackStack()
+            },
             ) {
             Icon(
                 modifier = Modifier.size(30.dp),
                 painter = painterResource(id = R.drawable.ic_baseline_arrow_back_ios_24),
-                contentDescription = stringResource(id = R.string.search),
+                contentDescription = stringResource(id = R.string.back),
                 tint = MaterialTheme.colors.primary
             )
         }
 
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 45.dp)) {
 
-            MovieContent()
+            MovieContent(state.movie)
 
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                LikedButton()
+                LikedButton(state.movie.liked) {
+                    state.movie.liked = it
+                    viewModel.onEvent(DetailsEvent.LikeMovie(state.movie))
+                }
             }
         }
     }

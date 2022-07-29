@@ -6,7 +6,7 @@ import com.kino.app.common.Constants
 data class NavigationRoute(
     val name: String,
     val route: String,
-    val resource: Int
+    val resource: Int = 0,
 ) {
     companion object {
         fun screens() : List<NavigationRoute> = listOf(

@@ -18,6 +18,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.kino.app.common.Constants
 import com.kino.app.domain.model.NavigationRoute
+import com.kino.app.features.home.detail.DetailScreen
+import com.kino.app.features.home.detail.DetailsViewModel
 import com.kino.app.features.home.explore.ExplorerScreen
 import com.kino.app.features.home.favorite.LikedScreen
 import com.kino.app.ui.theme.Purple200
@@ -36,8 +38,7 @@ fun NavigationControl(navItems: List<NavigationRoute>) {
             }
         )
     }) {
-        Box(modifier = Modifier
-            .fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize()) {
             Navigation(navController = navController)
         }
 
@@ -47,8 +48,12 @@ fun NavigationControl(navItems: List<NavigationRoute>) {
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Constants.NAVIGATION_ROUTES["explore"]!!.route ) {
-        composable(Constants.NAVIGATION_ROUTES["explore"]!!.route) { ExplorerScreen() }
-        composable(Constants.NAVIGATION_ROUTES["favorite"]!!.route) { LikedScreen() }
+        composable(Constants.NAVIGATION_ROUTES["explore"]!!.route) { ExplorerScreen(navController) }
+        composable(Constants.NAVIGATION_ROUTES["favorite"]!!.route) { LikedScreen(navController) }
+        composable(Constants.NAVIGATION_ROUTES["detail"]!!.route) {
+            DetailsViewModel.movieId = it.arguments?.getString("movie_id")!!
+            DetailScreen(navController)
+        }
     }
 }
 

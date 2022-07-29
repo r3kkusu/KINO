@@ -15,7 +15,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.kino.app.R
+import com.kino.app.common.Constants
 import com.kino.app.domain.model.Movie
 import com.kino.app.features.home.explore.components.SearchField
 import com.kino.app.features.home.favorite.components.MovieItem
@@ -23,6 +25,7 @@ import com.kino.app.ui.theme.Typography
 
 @Composable
 fun LikedScreen(
+    navController: NavController? = null,
     viewModel: FavoriteViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
@@ -55,9 +58,15 @@ fun LikedScreen(
         LazyColumn {
             items(group.size) { position ->
                 val movies = group[position]
-                MovieItem(movies) {
-                    viewModel.onEvent(FavoriteEvent.LikeMovie(it))
-                }
+                MovieItem(
+                    movies = movies,
+                    onLikedButtonClick = {
+                        viewModel.onEvent(FavoriteEvent.LikeMovie(it))
+                    },
+                    onSelectItem = {
+                        navController?.navigate("${Constants.NAVIGATION_ROUTES["detail"]!!.name}/${it}")
+                    }
+                )
             }
         }
     }
