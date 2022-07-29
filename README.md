@@ -1,5 +1,7 @@
 # KINO
 
+**ABOUT**
+
 KINO is a movie app to search movie and adding the movie to the favorites menu by liking the film.
 
 This project is for learning clean architecture design.
@@ -18,3 +20,6 @@ This is based on Philipp Lackner's youtube tutorials:
 
 The project follows the design concept of using Usecases.
 
+**DEMO**
+
+![demo](https://user-images.githubusercontent.com/8465561/181686284-ae25d957-b112-438a-81df-59e19c0d9ce7.gif)
