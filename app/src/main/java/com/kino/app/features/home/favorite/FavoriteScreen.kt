@@ -1,13 +1,12 @@
 package com.kino.app.features.home.favorite
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,18 +54,25 @@ fun LikedScreen(
             fontWeight = FontWeight.Bold,
         )
         SearchField(onValueChange = { term -> viewModel.onEvent(FavoriteEvent.Search(term)) })
-        LazyColumn {
-            items(group.size) { position ->
-                val movies = group[position]
-                MovieItem(
-                    movies = movies,
-                    onLikedButtonClick = {
-                        viewModel.onEvent(FavoriteEvent.LikeMovie(it))
-                    },
-                    onSelectItem = {
-                        navController?.navigate("${Constants.NAVIGATION_ROUTES["detail"]!!.name}/${it}")
+
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (state.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            } else {
+                LazyColumn {
+                    items(group.size) { position ->
+                        val movies = group[position]
+                        MovieItem(
+                            movies = movies,
+                            onLikedButtonClick = {
+                                viewModel.onEvent(FavoriteEvent.LikeMovie(it))
+                            },
+                            onSelectItem = {
+                                navController?.navigate("${Constants.NAVIGATION_ROUTES["detail"]!!.name}/${it}")
+                            }
+                        )
                     }
-                )
+                }
             }
         }
     }
