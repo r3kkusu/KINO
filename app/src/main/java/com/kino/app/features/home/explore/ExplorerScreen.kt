@@ -2,9 +2,11 @@ package com.kino.app.features.home.explore
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,17 +40,24 @@ fun ExplorerScreen(
             fontWeight = FontWeight.Bold,
         )
         SearchField(onValueChange = { term -> viewModel.onEvent(ExplorerEvent.Search(term)) })
-        LazyColumn {
-            items(state.movies.size) { position ->
-                val movie = state.movies[position]
-                MovieCard(
-                    movie = movie,
-                    onLikedButtonClick = {  liked ->
-                        movie.liked = liked
-                        viewModel.onEvent(ExplorerEvent.LikeMovie(movie))
+
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (state.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            } else {
+                LazyColumn {
+                    items(state.movies.size) { position ->
+                        val movie = state.movies[position]
+                        MovieCard(
+                            movie = movie,
+                            onLikedButtonClick = {  liked ->
+                                movie.liked = liked
+                                viewModel.onEvent(ExplorerEvent.LikeMovie(movie))
+                            }
+                        ) {
+                            navController?.navigate("${Constants.NAVIGATION_ROUTES["detail"]!!.name}/${movie._id}")
+                        }
                     }
-                ) {
-                    navController?.navigate("${Constants.NAVIGATION_ROUTES["detail"]!!.name}/${movie._id}")
                 }
             }
         }

@@ -59,16 +59,20 @@ fun DetailScreen(
             .fillMaxSize()
             .padding(bottom = 45.dp)) {
 
-            MovieContent(state.movie)
+            if (state.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            } else {
+                MovieContent(state.movie)
 
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                LikedButton(state.movie.liked) {
-                    state.movie.liked = it
-                    viewModel.onEvent(DetailsEvent.LikeMovie(state.movie))
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Bottom,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    LikedButton(state.movie.liked) {
+                        state.movie.liked = it
+                        viewModel.onEvent(DetailsEvent.LikeMovie(state.movie))
+                    }
                 }
             }
         }
