@@ -61,7 +61,9 @@ fun MovieCard(
             )
         }
 
-        Row(modifier = Modifier.height(IntrinsicSize.Max)) {
+        Row(modifier = Modifier
+            .height(IntrinsicSize.Max)
+            .padding(end = 40.dp)) {
             Image(
                 modifier = Modifier
                     .size(110.dp, 170.dp)
@@ -72,7 +74,7 @@ fun MovieCard(
             )
             Column(
                 modifier = Modifier
-                    .padding(start = 10.dp, end = 25.dp)
+                    .padding(start = 10.dp)
                     .fillMaxHeight()
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.Center
