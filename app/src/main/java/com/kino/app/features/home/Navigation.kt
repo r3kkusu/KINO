@@ -38,7 +38,9 @@ fun NavigationControl(navItems: List<NavigationRoute>) {
             }
         )
     }) {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 45.dp)) {
             Navigation(navController = navController)
         }
 

@@ -56,8 +56,7 @@ fun DetailScreen(
         }
 
         Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 45.dp)) {
+            .fillMaxSize()) {
 
             MovieContent(state.movie)
 
