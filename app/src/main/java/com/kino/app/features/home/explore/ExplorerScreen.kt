@@ -28,7 +28,7 @@ fun ExplorerScreen(
 ) {
     val state = viewModel.state
 
-    Column {
+    Column(modifier = Modifier.padding(bottom = 10.dp)) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()

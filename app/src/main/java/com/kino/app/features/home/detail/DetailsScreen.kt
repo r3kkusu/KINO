@@ -56,8 +56,7 @@ fun DetailScreen(
         }
 
         Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 45.dp)) {
+            .fillMaxSize()) {
 
             if (state.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))

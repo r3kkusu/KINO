@@ -42,7 +42,7 @@ fun LikedScreen(
     if (dou.isNotEmpty())
         group += dou
 
-    Column {
+    Column(modifier = Modifier.padding(bottom = 10.dp)) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
